@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ChatAppC39GSat</string>
+    <string name="application_logo">Application Logo</string>
+    <string name="application_development_signature">Application Development Signature</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="icon_back">Icon back</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="icon_right">icon right</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="or_create_my_account">or Create My Account</string>
+</resources>
