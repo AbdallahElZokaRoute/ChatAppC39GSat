@@ -1,4 +1,4 @@
-package com.route.chatappc39gsat.login
+package com.route.chatappc39gsat.register
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
@@ -8,43 +8,53 @@ import com.google.firebase.ktx.Firebase
 import com.route.chatappc39gsat.FirebaseUtils
 import com.route.chatappc39gsat.model.AppUser
 
-class LoginViewModel : ViewModel() {
+class RegisterViewModel : ViewModel() {
+    val firstNameState = mutableStateOf("")
+    val firstNameErrorState = mutableStateOf<String?>(null)
     val emailState = mutableStateOf("")
     val emailErrorState = mutableStateOf<String?>(null)
     val passwordState = mutableStateOf("")
     val passwordErrorState = mutableStateOf<String?>(null)
-    val isLoading = mutableStateOf(false)
-    val events = mutableStateOf<LoginEvent>(LoginEvent.Idle)
     val auth = Firebase.auth
-    fun login() {
+    val isLoading = mutableStateOf(false)
+    val events = mutableStateOf<RegisterEvent>(RegisterEvent.Idle)
+    fun register() {
         if (validateFields()) {
-            // Login
+            // Register
             isLoading.value = true
-            auth.signInWithEmailAndPassword(emailState.value, passwordState.value)
+            auth.createUserWithEmailAndPassword(emailState.value, passwordState.value)
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful) {
-                        Log.e("TAG", "error -> ${task.exception?.message}")
+                        isLoading.value = false
+                        Log.e("TAG", "register: ${task.exception?.message}")
                         return@addOnCompleteListener
                     }
                     val uid = task.result.user?.uid
-                    // get User from Firestore
-                    getUserFromFirestore(uid!!)
+                    // Add user to cloud Fire store
+                    addUserToFirestore(uid)
                 }
-
         }
     }
 
-    private fun getUserFromFirestore(uid: String) {
-        FirebaseUtils.getUser(uid, onSuccessListener = { documentSnapshot ->
+    private fun addUserToFirestore(uid: String?) {
+
+        val user = AppUser(uid, firstNameState.value, emailState.value)
+        FirebaseUtils.addUser(user, onSuccessListener = {
             isLoading.value = false
-            val user = documentSnapshot.toObject(AppUser::class.java)
-            navigateToHome(user!!)
+            events.value = RegisterEvent.NavigateToHome(user)
         }, onFailureListener = {
             isLoading.value = false
+            Log.e("Tag", "addUserToFirestore: ${it.message}")
         })
     }
 
     fun validateFields(): Boolean {
+        if (firstNameState.value.isEmpty() && firstNameState.value.isBlank()) {
+            firstNameErrorState.value = "Required"
+            return false
+        } else {
+            firstNameErrorState.value = null
+        }
         if (emailState.value.isEmpty() && emailState.value.isBlank()) {
             emailErrorState.value = "Required"
             return false
@@ -65,17 +75,4 @@ class LoginViewModel : ViewModel() {
         }
         return true
     }
-
-    fun navigateToRegister() {
-        events.value = LoginEvent.NavigateToRegister
-    }
-
-    fun navigateToHome(user: AppUser) {
-        events.value = LoginEvent.NavigateToHome(user)
-    }
-
-    fun resetEvent() {
-        events.value = LoginEvent.Idle
-    }
-
 }

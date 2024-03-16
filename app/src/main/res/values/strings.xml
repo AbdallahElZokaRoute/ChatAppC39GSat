@@ -10,4 +10,9 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="or_create_my_account">or Create My Account</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="create_account">Create Account</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
