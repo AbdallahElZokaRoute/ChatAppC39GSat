@@ -23,6 +23,7 @@ class LoginViewModel : ViewModel() {
             auth.signInWithEmailAndPassword(emailState.value, passwordState.value)
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful) {
+                        isLoading.value = false
                         Log.e("TAG", "error -> ${task.exception?.message}")
                         return@addOnCompleteListener
                     }

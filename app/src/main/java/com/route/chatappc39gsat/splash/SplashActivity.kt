@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import com.route.chatappc39gsat.R
 import com.route.chatappc39gsat.ui.theme.ChatAppC39GSatTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.route.chatappc39gsat.Constants
+import com.route.chatappc39gsat.home.HomeActivity
 import com.route.chatappc39gsat.login.LoginActivity
 
 class SplashActivity : ComponentActivity() {
@@ -47,7 +49,7 @@ fun SplashContent(viewModel: SplashViewModel = viewModel(), onFinish: () -> Unit
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 viewModel.navigate()
-            }, 2000
+            }, 1000
         )
     }
 
@@ -88,7 +90,16 @@ fun TriggerEvents(
     val context = LocalContext.current
     when (event) {
         SplashEvent.Idle -> {}
-        SplashEvent.NavigateToHome -> {}
+        is SplashEvent.NavigateToHome -> {
+            val intent = Intent(context, HomeActivity::class.java)
+            // Serializable (Java SDK io)
+            // Parcelable (Android OS )
+
+            intent.putExtra(Constants.USER_KEY, event.user)
+            context.startActivity(intent)
+            onFinish()
+        }
+
         SplashEvent.NavigateToLogin -> {
             val intent = Intent(context, LoginActivity::class.java)
             context.startActivity(intent)

@@ -24,9 +24,10 @@ fun ChatAuthTextField(
     state: MutableState<String>,
     error: String?,
     label: String,
+    modifier: Modifier = Modifier,
     isPassword: Boolean = false
 ) {
-    Column(modifier = Modifier.fillMaxWidth(0.9F)) {
+    Column(modifier = modifier.fillMaxWidth(0.9F)) {
         TextField(
             value = state.value,
             onValueChange = {

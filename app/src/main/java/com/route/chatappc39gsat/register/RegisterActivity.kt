@@ -1,7 +1,6 @@
 package com.route.chatappc39gsat.register
 
 import android.content.Intent
-import android.hardware.TriggerEvent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,11 +22,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.route.chatappc39gsat.R
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.route.chatappc39gsat.HomeActivity
+import com.route.chatappc39gsat.home.HomeActivity
 import com.route.chatappc39gsat.ui.theme.ChatAppC39GSatTheme
 import com.route.chatappc39gsat.utils.ChatAuthButton
 import com.route.chatappc39gsat.utils.ChatAuthTextField
 import com.route.chatappc39gsat.utils.ChatToolbar
+import com.route.chatappc39gsat.utils.LoadingDialog
 
 class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +96,7 @@ fun RegisterContent(
     TriggerEvent(event = viewModel.events.value) {
         onRegistrationSuccess()
     }
+    LoadingDialog(isLoading = viewModel.isLoading)
 }
 
 @Composable

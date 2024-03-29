@@ -31,7 +31,7 @@ import com.route.chatappc39gsat.ui.theme.black
 import com.route.chatappc39gsat.utils.ChatAuthTextField
 import com.route.chatappc39gsat.utils.ChatToolbar
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.route.chatappc39gsat.HomeActivity
+import com.route.chatappc39gsat.home.HomeActivity
 import com.route.chatappc39gsat.register.RegisterActivity
 import com.route.chatappc39gsat.ui.theme.black2
 import com.route.chatappc39gsat.utils.ChatAuthButton

@@ -22,10 +22,11 @@ fun LoadingDialog(isLoading: MutableState<Boolean>) {
                 color = blue,
                 modifier = Modifier
                     .background(Color.White, shape = RoundedCornerShape(8.dp))
-                    .padding(24.dp)
+                    .padding(36.dp)
                     .size(80.dp),
-                strokeWidth = 6.dp,
+                strokeWidth = 4.dp,
             )
         }
+    
 }
 

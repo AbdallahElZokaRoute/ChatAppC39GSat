@@ -61,6 +61,23 @@ fun ChatAuthButton(
     }
 }
 
+@Composable
+fun CreateButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Button(
+        onClick = { onClick() },
+        modifier = modifier,
+        colors = ButtonDefaults.buttonColors(containerColor = blue, contentColor = Color.White)
+    ) {
+        Text(
+            text = stringResource(R.string.create),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color.White,
+        )
+    }
+}
+
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun ChatAuthButtonPreview() {

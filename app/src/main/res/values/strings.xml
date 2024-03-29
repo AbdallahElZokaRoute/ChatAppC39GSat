@@ -15,4 +15,14 @@
     <string name="first_name">First Name</string>
     <string name="create_account">Create Account</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="chat_app">Chat App</string>
+    <string name="icon_add_room">icon add room</string>
+    <string name="title_activity_add_room">AddRoomActivity</string>
+    <string name="create_new_room">Create New Room</string>
+    <string name="group_image">group image</string>
+    <string name="room_name">Room name</string>
+    <string name="room_desc">Room Description</string>
+    <string name="category_selection_icon">category selection icon</string>
+    <string name="category_image_selection">Category Image Selection</string>
+    <string name="create">Create</string>
 </resources>
